@@ -33,7 +33,7 @@ GET:library.v1.books:author:2:application/json
 The most obvious use for this module is to generate cache keys, but we're using in [httq](https://github.com/guidesmiths/httq) to generate AMQP routing keys.
 Our architecture is event based, so instead of "POST /api/library/v1/books" we want "library.v1.books.created". We achieve this by configuring request-token with "alt" text.
 
-```json
+```js
 var requestToken = require('request-token')
 
 function(req, res, next) {
