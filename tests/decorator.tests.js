@@ -3,8 +3,33 @@ var decorator = require('../lib/decorator')
 
 describe('decorator', function() {
 
+    it('should decorate pillaged data with alternative method', function() {
+        decorator({
+            alt: {
+                POST: 'created'
+            }
+        }).decorate({
+            method: 'POST',
+            url: {
+                path: '/FOO/BAR'
+            },
+            params: {
+                a: 'FOO'
+            },
+            headers: {
+                b: 'BAR'
+            },
+            query: {
+                c: 'BAZ'
+            }
+        }, function(err, data) {
+            assert.ifError(err)
+            assert.equal(data.method_alt, 'created')
+        })
+    })
+
     it('should decorate pillaged data with lower case variants', function() {
-        decorator().decorate({
+        decorator({}).decorate({
             method: 'GET',
             url: {
                 path: '/FOO/BAR'
@@ -29,7 +54,7 @@ describe('decorator', function() {
     })
 
     it('should decorate pillaged data with upper case variants', function() {
-        decorator().decorate({
+        decorator({}).decorate({
             method: 'GET',
             url: {
                 path: '/FOO/BAR'

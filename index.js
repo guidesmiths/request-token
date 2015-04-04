@@ -7,8 +7,9 @@ var renderer = require('./lib/renderer')
 
 module.exports = function(config) {
 
+    config = config || {}
     var pillage = _.curry(pillager(config).pillage)
-    var decorate = decorator().decorate
+    var decorate = decorator(config).decorate
     var render = renderer(config).render
 
     function generate(req, next) {

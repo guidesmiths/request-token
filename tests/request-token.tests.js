@@ -25,7 +25,13 @@ describe('request-token', function() {
         server = http.createServer(function(req, res) {
             requestToken({
                 pattern: '/api/:system/:version/:entity',
-                template: '{{method}}:{{params.system}}.{{params.version}}.{{params.entity}}:{{query.sortBy}}:{{query.page}}:{{headers.content-type}}'
+                template: '{{params.system}}.{{params.version}}.{{params.entity}}.{{method_alt}}:{{query.sortBy}}:{{query.page}}:{{headers.content-type}}',
+                alt: {
+                    GET: 'requested',
+                    POST: 'created',
+                    PUT: 'amended',
+                    DELETE: 'deleted'
+                }
             }).generate(req, function(err, token) {
                 emitter.emit('token', token)
                 res.writeHead(200)
@@ -36,7 +42,7 @@ describe('request-token', function() {
                 if (err) return done(err)
             })
             emitter.on('token', function(token) {
-                assert.equal(token, 'GET:library.v1.books:created:2:application/json')
+                assert.equal(token, 'library.v1.books.requested:created:2:application/json')
                 done()
             })
         })

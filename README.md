@@ -25,9 +25,39 @@ function(req, res, next) {
 ```
 
 ```
-$ curl http://yourserver:3000/api/library/v1/books?sortBy=created&page=2 -H '{ Content-Type: application/json }'
-GET:library.v1.books:created:2:application/json
+$ curl http://yourserver:3000/api/library/v1/books?sortBy=author&page=2 -H '{ Content-Type: application/json }'
+GET:library.v1.books:author:2:application/json
 ```
+
+## Alternative HTTP Method Names
+The most obvious use for this module is to generate cache keys, but we're using in [httq](https://github.com/guidesmiths/httq) to generate AMQP routing keys.
+Our architecture is event based, so instead of "POST /api/library/v1/books" we want "library.v1.books.created". We achieve this by configuring request-token with "alt" text.
+
+```json
+var requestToken = require('request-token')
+
+function(req, res, next) {
+    requestToken({
+        pattern: '/api/:system/:version/:entity',
+        template: '{{params.system}}.{{params.version}}.{{params.entity}}.{{method_alt}}',
+        alt: {
+            "GET": "requested",
+            "POST": "created",
+            "PUT": "amended",
+            "DELETED": "deleted"
+        }
+    }).generate(req, function(err, token) {
+        if (err) return next(err)
+        res.status(200).send(token + '\n')
+    })
+})
+
+```
+
+```
+$ curl -X POST http://yourserver:3000/api/library/v1/books
+library.v1.books:created
+
 
 ## Available variables
 
@@ -41,27 +71,11 @@ GET:library.v1.books:created:2:application/json
     "port": null,
     "hostname": null,
     "hash": null,
-    "search": "?sortBy=created&page=2",
+    "search": "?sortBy=author&page=2",
     "pathname": "/api/library/v1/books",
-    "path": "/api/library/v1/books?sortBy=created&page=2",
-    "href": "/api/library/v1/books?sortBy=created&page=2"
+    "path": "/api/library/v1/books?sortBy=author&page=2",
+    "href": "/api/library/v1/books?sortBy=author&page=2"
   },
-  "method": "GET",
-  "headers": {
-    "content-type": "application/json",
-    "host": "localhost:3000",
-    "connection": "keep-alive"
-  },
-  "params": {
-    "system": "library",
-    "version": "v1",
-    "entity": "books"
-  },
-  "query": {
-    "sortBy": "created",
-    "page": "2"
-  },
-  "method_lc": "get",
   "url_lc": {
     "protocol": null,
     "slashes": null,
@@ -70,26 +84,11 @@ GET:library.v1.books:created:2:application/json
     "port": null,
     "hostname": null,
     "hash": null,
-    "search": "?sortby=created&page=2",
+    "search": "?sortby=author&page=2",
     "pathname": "/api/library/v1/books",
-    "path": "/api/library/v1/books?sortby=created&page=2",
-    "href": "/api/library/v1/books?sortby=created&page=2"
+    "path": "/api/library/v1/books?sortby=author&page=2",
+    "href": "/api/library/v1/books?sortby=author&page=2"
   },
-  "params_lc": {
-    "system": "library",
-    "version": "v1",
-    "entity": "books"
-  },
-  "headers_lc": {
-    "content-type": "application/json",
-    "host": "localhost:3000",
-    "connection": "keep-alive"
-  },
-  "query_lc": {
-    "sortBy": "created",
-    "page": "2"
-  },
-  "method_uc": "GET",
   "url_uc": {
     "protocol": null,
     "slashes": null,
@@ -98,23 +97,55 @@ GET:library.v1.books:created:2:application/json
     "port": null,
     "hostname": null,
     "hash": null,
-    "search": "?SORTBY=CREATED&PAGE=2",
+    "search": "?SORTBY=AUTHOR&PAGE=2",
     "pathname": "/API/LIBRARY/V1/BOOKS",
-    "path": "/API/LIBRARY/V1/BOOKS?SORTBY=CREATED&PAGE=2",
-    "href": "/API/LIBRARY/V1/BOOKS?SORTBY=CREATED&PAGE=2"
+    "path": "/API/LIBRARY/V1/BOOKS?SORTBY=AUTHOR&PAGE=2",
+    "href": "/API/LIBRARY/V1/BOOKS?SORTBY=AUTHOR&PAGE=2"
   },
-  "params_uc": {
-    "system": "LIBRARY",
-    "version": "V1",
-    "entity": "BOOKS"
+  "method": "GET",
+  "method_alt": "GET",
+  "method_lc": "get",
+  "method_uc": "GET",
+  "headers": {
+    "content-type": "application/json",
+    "host": "localhost:3000",
+    "connection": "keep-alive"
+  },
+  "headers_lc": {
+    "content-type": "application/json",
+    "host": "localhost:3000",
+    "connection": "keep-alive"
   },
   "headers_uc": {
     "content-type": "APPLICATION/JSON",
     "host": "LOCALHOST:3000",
     "connection": "KEEP-ALIVE"
   },
+  "params": {
+    "system": "library",
+    "version": "v1",
+    "entity": "books"
+  },
+  "params_lc": {
+    "system": "library",
+    "version": "v1",
+    "entity": "books"
+  },
+  "params_uc": {
+    "system": "LIBRARY",
+    "version": "V1",
+    "entity": "BOOKS"
+  },
+  "query": {
+    "sortBy": "author",
+    "page": "2"
+  },
+  "query_lc": {
+    "sortBy": "author",
+    "page": "2"
+  },
   "query_uc": {
-    "sortBy": "CREATED",
+    "sortBy": "AUTHOR",
     "page": "2"
   }
 }
