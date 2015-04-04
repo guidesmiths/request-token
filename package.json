@@ -1,6 +1,6 @@
 {
   "name": "request-token",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generates tokens from http requests by converting the method, url and headers to parameters and rendering them with a [hogan](http://twitter.github.io/hogan.js/) template.",
   "main": "index.js",
   "scripts": {
