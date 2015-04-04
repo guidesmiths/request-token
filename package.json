@@ -1,0 +1,36 @@
+{
+  "name": "request-token",
+  "version": "0.1.0",
+  "description": "Generates tokens from http requests by converting the method, url and headers to parameters and rendering them with a [hogan](http://twitter.github.io/hogan.js/) template.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:guidesmiths/request-token.git"
+  },
+  "keywords": [
+    "http",
+    "request",
+    "token",
+    "cache",
+    "key",
+    "template"
+  ],
+  "author": "Stephen Cresswell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guidesmiths/request-token/issues"
+  },
+  "homepage": "https://github.com/guidesmiths/request-token",
+  "devDependencies": {
+    "mocha": "^2.2.1",
+    "request": "^2.54.0"
+  },
+  "dependencies": {
+    "hogan.js": "^3.0.2",
+    "lodash": "^3.6.0",
+    "path-to-regexp": "^1.0.3"
+  }
+}
