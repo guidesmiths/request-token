@@ -29,8 +29,98 @@ $ curl http://yourserver:3000/api/library/v1/books?sortBy=created&page=2 -H '{ C
 GET:library.v1.books:created:2:application/json
 ```
 
+## Available variables
+
+```json
+{
+  "url": {
+    "protocol": null,
+    "slashes": null,
+    "auth": null,
+    "host": null,
+    "port": null,
+    "hostname": null,
+    "hash": null,
+    "search": "?sortBy=created&page=2",
+    "pathname": "/api/library/v1/books",
+    "path": "/api/library/v1/books?sortBy=created&page=2",
+    "href": "/api/library/v1/books?sortBy=created&page=2"
+  },
+  "method": "GET",
+  "headers": {
+    "content-type": "application/json",
+    "host": "localhost:3000",
+    "connection": "keep-alive"
+  },
+  "params": {
+    "system": "library",
+    "version": "v1",
+    "entity": "books"
+  },
+  "query": {
+    "sortBy": "created",
+    "page": "2"
+  },
+  "method_lc": "get",
+  "url_lc": {
+    "protocol": null,
+    "slashes": null,
+    "auth": null,
+    "host": null,
+    "port": null,
+    "hostname": null,
+    "hash": null,
+    "search": "?sortby=created&page=2",
+    "pathname": "/api/library/v1/books",
+    "path": "/api/library/v1/books?sortby=created&page=2",
+    "href": "/api/library/v1/books?sortby=created&page=2"
+  },
+  "params_lc": {
+    "system": "library",
+    "version": "v1",
+    "entity": "books"
+  },
+  "headers_lc": {
+    "content-type": "application/json",
+    "host": "localhost:3000",
+    "connection": "keep-alive"
+  },
+  "query_lc": {
+    "sortBy": "created",
+    "page": "2"
+  },
+  "method_uc": "GET",
+  "url_uc": {
+    "protocol": null,
+    "slashes": null,
+    "auth": null,
+    "host": null,
+    "port": null,
+    "hostname": null,
+    "hash": null,
+    "search": "?SORTBY=CREATED&PAGE=2",
+    "pathname": "/API/LIBRARY/V1/BOOKS",
+    "path": "/API/LIBRARY/V1/BOOKS?SORTBY=CREATED&PAGE=2",
+    "href": "/API/LIBRARY/V1/BOOKS?SORTBY=CREATED&PAGE=2"
+  },
+  "params_uc": {
+    "system": "LIBRARY",
+    "version": "V1",
+    "entity": "BOOKS"
+  },
+  "headers_uc": {
+    "content-type": "APPLICATION/JSON",
+    "host": "LOCALHOST:3000",
+    "connection": "KEEP-ALIVE"
+  },
+  "query_uc": {
+    "sortBy": "CREATED",
+    "page": "2"
+  }
+}
+```
+
 ## Gotchas
 
-1 Headers being lowercased automatically.
+1. Depending on your client / server you may notice header names being lowercased automatically.
 
-## Bonus
