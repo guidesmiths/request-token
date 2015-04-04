@@ -57,10 +57,9 @@ function(req, res, next) {
 ```
 $ curl -X POST http://yourserver:3000/api/library/v1/books
 library.v1.books:created
-
+```
 
 ## Available variables
-
 ```json
 {
   "url": {
