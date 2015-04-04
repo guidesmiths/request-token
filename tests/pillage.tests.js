@@ -37,8 +37,8 @@ describe('pillager', function() {
             }).pillage(req, function(err, booty) {
                 assert.ifError(err)
                 assert.equal(booty.url.pathname, '/foo/bar')
-                assert.equal(booty.url.query.baz, '1')
-                assert.ok(booty.url.query.hasOwnProperty('shaz'))
+                assert.equal(booty.query.baz, '1')
+                assert.ok(booty.query.hasOwnProperty('shaz'))
                 done()
             })
         })

@@ -7,6 +7,9 @@ describe('renderer', function() {
         renderer({
             template: '{{params.a}}.{{headers.b}}.{{query.c}}'
         }).render({
+            url: {
+                path: '/foo/bar'
+            },
             params: {
                 a: 'foo'
             },

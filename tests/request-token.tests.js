@@ -21,22 +21,22 @@ describe('request-token', function() {
         server.close(done)
     })
 
-    it.only('should construct request tokens', function(done) {
+    it('should construct request tokens', function(done) {
         server = http.createServer(function(req, res) {
             requestToken({
                 pattern: '/api/:system/:version/:entity',
-                template: '{{method}}:{{params.system}}.{{params.version}}.{{params.entity}}:{{query.sortBy}}:{{query.page}}'
+                template: '{{method}}:{{params.system}}.{{params.version}}.{{params.entity}}:{{query.sortBy}}:{{query.page}}:{{headers.content-type}}'
             }).generate(req, function(err, token) {
                 emitter.emit('token', token)
                 res.writeHead(200)
                 res.end()
             })
         }).listen(3000).on('listening', function() {
-            get('/api/library/v1/books', { qs: { sortBy: 'created', page: 2 } }, function(err) {
+            get('/api/library/v1/books', { qs: { sortBy: 'created', page: 2 }, headers: { 'Content-Type': 'application/json' } }, function(err) {
                 if (err) return done(err)
             })
             emitter.on('token', function(token) {
-                assert.equal(token, 'GET:library.v1.books:created:2')
+                assert.equal(token, 'GET:library.v1.books:created:2:application/json')
                 done()
             })
         })
