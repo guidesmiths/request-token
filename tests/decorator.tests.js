@@ -5,7 +5,7 @@ describe('decorator', function() {
 
     it('should decorate pillaged data with alternative method', function() {
         decorator({
-            alt: {
+            method_alt: {
                 POST: 'created'
             }
         }).decorate({

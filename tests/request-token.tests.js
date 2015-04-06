@@ -26,7 +26,7 @@ describe('request-token', function() {
             requestToken({
                 pattern: '/api/:system/:version/:entity',
                 template: '{{params.system}}.{{params.version}}.{{params.entity}}.{{method_alt}}:{{query.sortBy}}:{{query.page}}:{{headers.content-type}}',
-                alt: {
+                method_alt: {
                     GET: 'requested',
                     POST: 'created',
                     PUT: 'amended',

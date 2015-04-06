@@ -31,7 +31,7 @@ GET:library.v1.books:author:2:application/json
 
 ## Alternative HTTP Method Names
 The most obvious use for this module is to generate cache keys, but we're using in [httq](https://github.com/guidesmiths/httq) to generate AMQP routing keys.
-Our architecture is event based, so instead of "POST /api/library/v1/books" we want "library.v1.books.created". We achieve this by configuring request-token with "alt" text.
+Our architecture is event based, so instead of "POST /api/library/v1/books" we want "library.v1.books.created". We achieve this by configuring request-token with "method_alt" text.
 
 ```js
 var requestToken = require('request-token')
@@ -40,7 +40,7 @@ function(req, res, next) {
     requestToken({
         pattern: '/api/:system/:version/:entity',
         template: '{{params.system}}.{{params.version}}.{{params.entity}}.{{method_alt}}',
-        alt: {
+        method_alt: {
             "GET": "requested",
             "POST": "created",
             "PUT": "amended",
