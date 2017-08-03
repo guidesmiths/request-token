@@ -33,6 +33,7 @@ describe('request-token', function() {
                     DELETE: 'deleted'
                 }
             }).generate(req, function(err, token) {
+                assert.ifError(err)
                 emitter.emit('token', token)
                 res.writeHead(200)
                 res.end()
@@ -49,13 +50,8 @@ describe('request-token', function() {
     })
 
     function get(url, options, next) {
-        if (arguments.length == 2) return get(url, {}, arguments[1])
+        if (arguments.length === 2) return get(url, {}, arguments[1])
         _request(_.extend({method: 'GET', url: url}, options), next)
-    }
-
-    function post(url, options, next) {
-        if (arguments.length == 2) return post(url, {}, arguments[1])
-        _request(_.extend({method: 'POST', url: url}, options), next)
     }
 
     function _request(options, next) {
