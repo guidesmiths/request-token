@@ -38,7 +38,7 @@ describe('pillager', function() {
                 assert.ifError(err)
                 assert.equal(booty.url.pathname, '/foo/bar')
                 assert.equal(booty.query.baz, '1')
-                assert.ok(booty.query.hasOwnProperty('shaz'))
+                assert.ok(_.has(booty.query, 'shaz'))
                 done()
             })
         })
