@@ -1,12 +1,15 @@
 # request-token
-
 Generates tokens from http requests by converting the method, url and headers to parameters and rendering them with a [hogan](http://twitter.github.io/hogan.js/) template.
 Potentially useful for generating cache keys.
 
-## Installation
-```
-npm install request-token
-```
+[![NPM version](https://img.shields.io/npm/v/request-token.svg?style=flat-square)](https://www.npmjs.com/package/request-token)
+[![NPM downloads](https://img.shields.io/npm/dm/request-token.svg?style=flat-square)](https://www.npmjs.com/package/request-token)
+[![Build Status](https://img.shields.io/travis/guidesmiths/request-token/master.svg)](https://travis-ci.org/guidesmiths/request-token)
+[![Code Climate](https://codeclimate.com/github/guidesmiths/request-token/badges/gpa.svg)](https://codeclimate.com/github/guidesmiths/request-token)
+[![Test Coverage](https://codeclimate.com/github/guidesmiths/request-token/badges/coverage.svg)](https://codeclimate.com/github/guidesmiths/request-token/coverage)
+[![Code Style](https://img.shields.io/badge/code%20style-imperative-brightgreen.svg)](https://github.com/guidesmiths/eslint-config-imperative)
+[![Dependency Status](https://david-dm.org/guidesmiths/request-token.svg)](https://david-dm.org/guidesmiths/request-token)
+[![devDependencies Status](https://david-dm.org/guidesmiths/request-token/dev-status.svg)](https://david-dm.org/guidesmiths/request-token?type=dev)
 
 ## Usage
 ```js
@@ -56,7 +59,7 @@ function(req, res, next) {
 
 ```
 $ curl -X POST http://yourserver:3000/api/library/v1/books
-library.v1.books:created
+library.v1.books.created
 ```
 
 ## Available variables
