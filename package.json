@@ -8,7 +8,8 @@
     "istanbul": "istanbul cover --report html --report lcov _mocha",
     "codeclimate": "(test -e .codeclimate && npm run istanbul && source .codeclimate && codeclimate-test-reporter < coverage/lcov.info) || echo skipping codeclimate",
     "lint": "eslint .",
-    "prepush": "npm run lint && npm run codeclimate"
+    "precommit": "npm run lint && npm test",
+    "prepush": "npm run codeclimate"
   },
   "repository": {
     "type": "git",
