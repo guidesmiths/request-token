@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "async": "^2.5.0",
-    "debug": "^2.6.8",
+    "debug": "^3.1.0",
     "hogan.js": "^3.0.2",
     "lodash": "^4.17.4",
     "path-to-regexp": "^1.7.0"
